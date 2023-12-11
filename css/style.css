@@ -1,7 +1,21 @@
+:root {
+    --bs-body-font-family: ; /* Page Font Family */
+    --bs-body-bg: ; /* Background Color */
+}
+
 * { box-sizing: border-box;}
+
 body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    font-family: var(--bs-body-font-family);
+    background-color: var(--bs-body-bg);
 }
+
 main {flex-grow: 1;}
+
+/* Show dropdown on hover */
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
