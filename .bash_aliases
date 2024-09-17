@@ -16,27 +16,13 @@ alias stop="sudo systemctl stop $1"
 alias web='cd /var/www/html'
 alias css='cd /var/www/html/assets/css'
 alias js='cd /var/www/html/assets/js'
-alias inc='cd /var/www/includes'
+alias inc='cd /var/www/html/assets/inc'
 alias vhosts='cd /etc/apache2/sites-available'
 alias phpdir='cd /etc/php/*.*/apache2'
 
 alias log='sudo tail /var/log/apache2/*-error.log'
 alias listening='lsof -iTCP -sTCP:LISTEN -n -P +c0'
 alias passgen="openssl rand -base64 $1"
-
-#------------------------------#
-#       User Variables         #
-#------------------------------#
-
-# Colors
-export blueonwhite='[7;44;39m'
-export pinkonwhite='[7;45;37m'
-export whiteonorange='[7;47;91m'
-export whiteonred='[7;47;31m'
-export whiteonblue='[7;107;34m'
-export end='\e[0m'
-
-export TIMESTAMP=$(date +%b.%d.%Y @ %T)
 
 #------------------------------#
 #      Custom PS1 Prompt       #
