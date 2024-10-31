@@ -13,11 +13,9 @@ echo <<<HEADER
 		<link rel="stylesheet" href="assets/icons/font/bootstrap-icons.min.css">
 <!-- Bootstrap CSS -->
 		<link rel="stylesheet" href="assets/css/bootstrap.min.css"/>
-		<link rel="stylesheet" href="assets/css/animate.min.css" />
-		<link rel="stylesheet" href="assets/css/hover-min.css" />
-		<link rel="stylesheet" href="assets/js/venobox.min.js" />
 <!-- Custom Styles -->
 		<link rel="stylesheet" href="assets/css/style.css" />
+<!-- Jquery -->
 		<script src="assets/js/jquery-3.7.0.min.js"></script>
 <!-- Page Title -->
     <title>$title</title>
@@ -29,47 +27,48 @@ HEADER;
 function genFooter(){
 	$year = date("Y");
 echo <<<FOOTER
-</main>
-	<footer>
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-md-6">
-					<p class="text-center">Copyright &copy; $year</p>
-				</div>
-				<!-- /. col -->
-			</div>
-			<!-- /. row -->
-		</div>
-		<!-- /. container -->
-	</footer>
-	<!-- /. Footer -->
+    </main>
+    <footer>
+           <div class="container d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+            <div class="col-md-4 d-flex align-items-center">
+                <div class="text-center mb-3 mb-md-0">
+                    <span class="text-muted">© ${year} My Project, Inc</span>
+                </div>
+            </div>
+            <div class="col-md-4 justify-content-end d-flex gap-3">
+                <div>
+                    <a href="#"><i class="bi bi-facebook social-icon"></i></a>
+                </div>
+                <div>
+                    <a href="#"><i class="bi bi-instagram social-icon"></i></a>
+                </div>
+                <div>
+                    <a href="#"><i class="bi bi-twitter-x social-icon"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
 <!-- Bootstrap JS -->
 	<script src="assets/js/bootstrap.bundle.min.js"></script>
-	<script src="assets/js/venobox.min.js"></script>
 </body>
 </html>
 FOOTER;
 }
-function dbConn($host, $dbname, $dbuser, $dbpass){
-	try {
-		$dsn = "mysql:host=$host;dbname=$dbname";
-		$pdo = new PDO($dsn, $dbuser, $dbpass);
-		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-		return $pdo;
-	} catch(PDOException $e){
-		die("Connection failed: " . $e->getMessage());
-	}
+
+function sanitize($input){
+	$data = trim($input);
+	$data = stripslashes($input);
+	$data = htmlspecialchars($data);
+	return $data;
 }
 
-function readRecords($pdo, $tablename){
-	try {
-		$stmt = $pdo->prepare('SELECT * FROM' . $tablename);
-		$stmt->execute();
-		return $stmt->fetchAll(PDO::FETCH_ASSOC);
-	} catch(PDOException $e){
-		die("Something went wrong, try again later. Error: " . $e->=getMessage());
-	}
+function isValidUsername($username){
+	$pattern = '/^[A-Za-z0-9-_]+$/';
+	return preg_match($pattern, $username);
+}
+
+function isValidEmail($email){
+	return filter_var($email, FILTER_VALIDATE_EMAIL);
 }
 ?>
 

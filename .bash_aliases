@@ -24,6 +24,9 @@ alias log='sudo tail /var/log/apache2/*-error.log'
 alias listening='lsof -iTCP -sTCP:LISTEN -n -P +c0'
 alias passgen="openssl rand -base64 $1"
 
+alias phpcs='php /usr/bin/phpcs.phar'
+alias phpcbf='php /usr/bin/phpcbf.phar'
+
 #------------------------------#
 #      Custom PS1 Prompt       #
 #------------------------------#

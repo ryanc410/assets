@@ -19,8 +19,8 @@
 			<div class="d-flex">
 				<?php
 				if(isset($_SESSION["loggedin"])){
-					?>
-					<div class="dropdown">
+				?>
+					<div class="dropdown" style="margin-right: 50px;">
 						<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 							<i class="bi bi-person-circle me-2"></i><?php echo $_SESSION["username"]; ?>
 						</button>
@@ -30,15 +30,25 @@
 							<li><a class="dropdown-item" href="logout.php"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
 						</ul>
 					</div>
-					<?php
+				<?php
 				} else {
-					?>
+				?>
 					<a class="btn btn-primary me-3" href="signup-form.php">Signup</a>
 					<a class="btn btn-warning me-3" href="login-form.php">Login</a>
-					<?php
+				<?php
 				}
 				?>
 			</div>
 		</div>
 	</div>
 </nav>
+<?php
+if(!empty($_SESSION['error'])){
+	echo "<div class='alert alert-danger w-50 mx-auto'><i class='bi bi-exclamation-triangle me-2'></i>". $_SESSION['error']['message']."</div>";
+	unset($_SESSION['error']);
+}
+if(!empty($_SESSION['success'])){
+	echo "<div class='alert alert-success w-50 mx-auto'><i class='bi bi-check-circle me-2'></i>". $_SESSION['success']['message']."</div>";
+	unset($_SESSION['success']);
+}
+?>
